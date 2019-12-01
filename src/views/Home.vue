@@ -5,14 +5,15 @@
       <button v-on:click="$router.push('/receber')">&#10010;</button>
     </div>
     <div class="items">
-        <div v-for="item in $store.state.items" class="item" :key="item.uid">
-          <div>
-            {{item.desc}} ({{item.tag}})
-          </div>
-          <div>-{{item.valor}}</div>
+      <button v-on:click="$router.push('/inserir')">adicionar</button>
+      <div v-for="item in $store.state.items" class="item" :key="item.uid">
+        <div>
+          {{item.desc}} ({{item.tag}})
         </div>
+        <div>-{{item.valor}}</div>
+      </div>
     </div>
-    <button v-on:click="$router.push('/inserir')">&odash;</button>
+    <button v-on:click="$store.commit('clearItems')">limpar!</button>
   </main>
 </template>
 
@@ -29,6 +30,9 @@ export default {
   grid-gap: 10px
   justify-items: center
   justify-content: center
+.items
+  display: grid
+  grid-gap: 10px
 h2
   font-size: 2em
   margin: 0px

@@ -16,10 +16,13 @@ export default new Vuex.Store({
   mutations: {
     addItem(state, item) {
       state.items.push(item)
-      state.balance -= item.valor
+      state.balance -= parseFloat(item.valor.replace(",", "."))
     },
     addFunds(state, valor) {
       state.balance += valor
+    },
+    clearItems(state) {
+      state.items = []
     }
   },
   actions: {
