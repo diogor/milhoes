@@ -5,8 +5,11 @@
       <button v-on:click="$router.push('/receber')">&#10010;</button>
     </div>
     <div class="items">
-        <div v-for="item in $store.state.items" class="item" :key="item">
-            {{item.valor}}
+        <div v-for="item in $store.state.items" class="item" :key="item.uid">
+          <div>
+            {{item.desc}} ({{item.tag}})
+          </div>
+          <div>-{{item.valor}}</div>
         </div>
     </div>
     <button v-on:click="$router.push('/inserir')">&odash;</button>

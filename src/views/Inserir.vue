@@ -11,6 +11,11 @@
 </template>
 
 <script>
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
 export default {
     name: 'inserir',
     data() {
@@ -18,7 +23,8 @@ export default {
             item: {
                 tag: null,
                 desc: null,
-                valor: 0 
+                valor: 0,
+                uid: 0
             }
         }
     },
@@ -26,6 +32,7 @@ export default {
         addItem() {
             let { tag, desc, valor } = this.item
             if (tag && desc && valor) {
+                this.item.uid = uuidv4()
                 this.$store.commit('addItem', this.item)
                 this.item = {}
             }
