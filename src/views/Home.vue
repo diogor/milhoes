@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="balance">
-      <h2>{{$store.state.balance.toString().replace('.', ',')}}</h2>
+      <h2>{{$store.state.balance.toFixed(2).replace('.', ',')}}</h2>
       <button v-on:click="$router.push('/receber')">&#10010;</button>
     </div>
     <div class="items">
