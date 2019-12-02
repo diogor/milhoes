@@ -24,7 +24,8 @@ export default {
                 tag: null,
                 desc: null,
                 valor: 0,
-                uid: 0
+                uid: 0,
+                date: null
             }
         }
     },
@@ -33,6 +34,7 @@ export default {
             let { tag, desc, valor } = this.item
             if (tag && desc && valor) {
                 this.item.uid = uuidv4()
+                this.item.date = new Date()
                 this.$store.commit('addItem', this.item)
                 this.item = {}
             }

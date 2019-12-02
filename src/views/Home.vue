@@ -6,7 +6,8 @@
     </div>
     <div class="items">
       <button v-on:click="$router.push('/inserir')">adicionar</button>
-      <div v-for="item in $store.state.items" class="item" :key="item.uid">
+      <div v-for="item in items" class="item" :key="item.uid">
+        <div>{{item.date.toLocaleString()}}</div>
         <div>
           {{item.desc}} ({{item.tag}})
         </div>
@@ -19,7 +20,12 @@
 
 <script>
 export default {
-  name: 'home'
+  name: 'home',
+  data() {
+    return {
+      items: this.$store.state.items
+    }
+  }
 }
 </script>
 
