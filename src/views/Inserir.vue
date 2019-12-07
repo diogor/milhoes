@@ -1,13 +1,36 @@
 <template>
-    <main>
-        <input type="text" name="tag" placeholder="tag" v-model="item.tag">
-        <input type="text" name="desc" placeholder="desc" v-model="item.desc">
-        <input type="text" name="valor" placeholder="R$" v-model="item.valor">
-        <div class="buttons">
-            <button v-on:click="$router.push('/')">&lBarr;</button>
-            <button v-on:click="addItem()">Adicionar</button>
-        </div>
-    </main>
+    <va-form ref="form" type="vertical">
+        <va-form-item label="Tag">
+            <va-input
+            name="tag"
+            v-model="item.tag"
+            placeholder="Tag"
+            clearable />
+        </va-form-item>
+        <va-form-item label="Descrição" need>
+            <va-input
+            name="desc"
+            v-model="item.desc"
+            :rules="[{type:'required'}]"
+            placeholder="Descrição do gasto"
+            clearable />
+        </va-form-item>
+        <va-form-item label="Valor" need>
+            <va-input
+            name="valor"
+            prefix="R$"
+            v-model="item.valor"
+            :rules="[{type:'required'}, 'number']"
+            placeholder="Valor do gasto"
+            clearable />
+        </va-form-item>
+        <va-form-item>
+            <va-button type="dark" v-on:click="addItem()">
+                <va-icon type="plus-square" icon-style="regular" margin="0 7px 0 0"></va-icon>
+                Adicionar
+            </va-button>
+        </va-form-item>
+    </va-form>        
 </template>
 
 <script>
@@ -37,6 +60,7 @@ export default {
                 this.item.date = new Date()
                 this.$store.commit('addItem', this.item)
                 this.item = {}
+                this.$router.push('/')
             }
         }
     }

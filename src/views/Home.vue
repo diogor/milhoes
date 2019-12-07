@@ -1,21 +1,30 @@
 <template>
-  <main>
-    <div class="balance">
-      <h2>{{$store.state.balance.toString().replace('.', ',')}}</h2>
-      <button v-on:click="$router.push('/receber')">&#10010;</button>
-    </div>
-    <div class="items">
-      <button v-on:click="$router.push('/inserir')">adicionar</button>
-      <div v-for="item in items" class="item" :key="item.uid">
-        <div>{{item.date.toLocaleString()}}</div>
-        <div>
-          {{item.desc}} ({{item.tag}})
-        </div>
-        <div>-{{item.valor}}</div>
+  <div>
+    <va-page-header>
+      <div slot="title">
+        <span>R${{$store.state.balance.toString().replace('.', ',')}}</span>
       </div>
+      <div slot="actions">
+        <va-button type="default" v-on:click="$router.push('/receber')">
+          <va-icon type="plus-square" icon-style="regular" margin="0 7px 0 0"></va-icon>
+          Adicionar fundos
+        </va-button>
+      </div>
+    </va-page-header>
+    <div class="items">
+      <va-card v-for="item in items" :key="item.uid" elevation="3" padding="5">
+        <div slot="topLeft">R${{item.valor}}</div>
+        <div slot="topRight">{{item.tag}} - {{item.date.toLocaleString()}}</div>
+        {{item.desc}}
+      </va-card>
     </div>
-    <button v-on:click="$store.commit('clearItems')">limpar!</button>
-  </main>
+    <div class="actions">
+      <va-button type="dark" v-on:click="$router.push('/inserir')">
+        <va-icon type="plus-square" icon-style="regular" margin="0 7px 0 0"></va-icon>
+        Despesa
+      </va-button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -30,16 +39,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.balance
-  display: grid
-  grid-template-columns: auto auto
-  grid-gap: 10px
-  justify-items: center
-  justify-content: center
+.actions
+  margin-top: 10px
 .items
   display: grid
   grid-gap: 10px
-h2
-  font-size: 2em
-  margin: 0px
+.va-card
+  padding: 10px
 </style>
